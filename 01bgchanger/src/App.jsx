@@ -1,27 +1,20 @@
-import { useState } from "react";
-import Account from "./components/Account";
-import BgChange from "./components/BgChange";
-import Password from "./components/Password";
-import Calculator from "./components/Calculator";
-import Accordian from "./components/Accordian";
-import Greetings from "./components/Grettings";
-import UserStatus from "./components/UserStatus";
-import Temp from "./components/Temp";
-import Counter from "./components/Counter";
-import Todo from "./components/Todo";
-import Profile from "./components/Profile";
-import UseReducer from "./components/UseReducer";
-import Calculate from "./components/Calculate";
-import MyTodo from "./components/MyTodo";
-import Cal from "./components/Cal";
-function App() {
-  const [display, setDisplay] = useState(false);
+import React, { useState } from "react";
+import { createContext } from "react";
+import Entry from "./sections/Entry";
+import UserContext from "./sections/UserContext";
 
+export const UserContexts = createContext();
+const App = () => {
+  const [user, setName] = useState({ name: "usman" });
+  const updateUser = (inputVal) => {
+    setName({ name: inputVal });
+  };
   return (
-    <div>
-      <Cal />
-    </div>
+    <UserContexts.Provider value={{ user, updateUser }}>
+      <UserContext />
+      <Entry />
+    </UserContexts.Provider>
   );
-}
+};
 
 export default App;
